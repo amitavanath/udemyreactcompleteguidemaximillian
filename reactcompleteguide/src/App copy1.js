@@ -11,8 +11,7 @@ class App extends Component {
         <Person name="Manu" age = "35">My hobbies are fun fun</Person>
         <Person name="Stephanie" age = "26"/>
       </div>
-    );
-  } 
+    )} 
 }
 
 export default App;

@@ -7,9 +7,9 @@ class App extends Component {
   
   state = {
     Persons: [
-      { id: 'asdsad', name: 'Max', age: 28 },
-      { id: 'afsdf', name: 'Manu', age: 35 },
-      { id: 'sfsertret', name: 'Stephanie', age: 20 }
+      { name: 'Max', age: 28 },
+      { name: 'Manu', age: 35 },
+      { name: 'Stephanie', age: 20 }
     ],
     showPersons: false
   }
@@ -39,15 +39,6 @@ class App extends Component {
     this.setState({showPersons: !doesShow});
   }
   
-  deletePersonHandler = (personIndex) => {
-    //this is just a reference copy..changes are not immutable
-    //const personList = this.state.Persons;
-    //better use slice to copy into new obj
-    //const personList = this.state.Persons.slice;
-    const personList = [...this.state.Persons];
-    personList.splice(personIndex,1);
-    this.setState({Persons: personList});
-  }
 
   render() {
 
@@ -56,15 +47,15 @@ class App extends Component {
     if(this.state.showPersons){
       persons = (
         <div>
-            {
-              this.state.Persons.map((person, index) => {
-                return <Person 
-                  click={() => this.deletePersonHandler(index)}
-                  name={person.name}
-                  age={person.age} 
-                  key={person.id}/>
-              })
-            }
+            <Person name={this.state.Persons[0].name} 
+                    age = {this.state.Persons[0].age}
+                    textChange = {this.nameChangedHandler}/>
+            <Person name={this.state.Persons[1].name} 
+                    age = {this.state.Persons[1].age}
+                    click = {this.switchNameHandler.bind(this, "Max!!")}>
+                      My hobbies are fun fun</Person>
+            <Person name={this.state.Persons[2].name} 
+                    age = {this.state.Persons[2].age}/>
           </div>
       );
     }
