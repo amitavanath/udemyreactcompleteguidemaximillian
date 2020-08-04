@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Person from './Person/Person'
+import Persons from '../Components/Persons/Persons';
+import Cockpit from '../Components/Cockpit/Cockpit';
 
 class App extends Component {
   
@@ -13,20 +13,10 @@ class App extends Component {
     ],
     showPersons: false
   }
-  
-  switchNameHandler = (newName) => {
-    this.setState({
-      Persons: [
-        { name: newName, age: 28 },
-        { name: 'Manus', age: 50 },
-        { name: 'Stephanies', age: 120 }
-      ]
-    })
-  }
 
   nameChangedHandler = (event, id) => {
     const personIndex = this.state.Persons.findIndex(p => {
-      return p.id == id;
+      return p.id === id;
     });
 
     const person = {
@@ -64,34 +54,22 @@ class App extends Component {
     if(this.state.showPersons){
       persons = (
         <div>
-            {
-              this.state.Persons.map((person, index) => {
-                return <Person 
-                  click={() => this.deletePersonHandler(index)}
-                  name={person.name}
-                  age={person.age} 
-                  key={person.id}
-                  textChange={(event) => 
-                    this.nameChangedHandler(event, person.id)}/>
-              })
-            }
+           <Persons 
+              Persons={this.state.Persons}
+              clicked={this.deletePersonHandler}
+              changed={this.nameChangedHandler} />
           </div>
       );
     }
 
     return (
       <div className="App">
-        <h1>Hi I'm a test react APP !!</h1>
-        <p>Lets see things working....</p>
-        <button onClick={this.togglePersonsHandler}>Toggle Persons</button>
+        <Cockpit clicked={this.togglePersonsHandler} />
         {persons}
         
       </div>
     );
   }
-  
-  
-   
 }
 
 export default App;
